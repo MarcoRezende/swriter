@@ -1,20 +1,12 @@
-import { IsEnum } from 'class-validator';
+import { Genre } from 'src/genre/entities/genre.entity';
 import { BaseEntity } from 'src/_common/base_entity';
-import { Column, Entity } from 'typeorm';
-import { GENRES, MOOD, PHRASE, WORD } from '../models/hints-kind.model';
-
-const EveryKind = {
-  ...GENRES,
-  ...MOOD,
-  ...PHRASE,
-  ...WORD,
-};
-
-const EveryKindEnum: typeof EveryKind = EveryKind;
+import { Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class Hint extends BaseEntity<Hint> {
-  @IsEnum(GENRES, { always: true, each: true })
-  @Column()
-  genres: GENRES;
+  @OneToMany(type => Genre, genre => genre.hint, {
+    onDelete: 'SET NULL',
+    nullable: true,
+  })
+  genres: Genre[];
 }
