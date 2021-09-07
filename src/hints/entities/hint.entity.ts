@@ -14,7 +14,7 @@ const EveryKindEnum: typeof EveryKind = EveryKind;
 
 @Entity()
 export class Hint extends BaseEntity<Hint> {
-  @IsEnum(EveryKindEnum, { always: true, each: true })
+  @IsEnum(GENRES, { always: true, each: true })
   @Column()
-  kind: typeof EveryKindEnum[];
+  genres: GENRES;
 }
