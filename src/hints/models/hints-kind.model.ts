@@ -1,8 +1,3 @@
-export enum GENRES {
-  SCI_FI = 'SCI_FI',
-  ROMANCE = 'ROMANCE',
-}
-
 export enum MOOD {
   CHEERFUL = 'CHEERFUL',
   REFLECTIVE = 'REFLECTIVE',
