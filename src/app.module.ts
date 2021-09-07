@@ -5,6 +5,7 @@ import { configValidationSchema } from './config/config.schema';
 import { HintsModule } from './hints/hints.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GenreModule } from './genre/genre.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       },
     }),
     HintsModule,
+    GenreModule,
   ],
   controllers: [AppController],
   providers: [AppService],
