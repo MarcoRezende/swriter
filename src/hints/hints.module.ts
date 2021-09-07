@@ -4,6 +4,6 @@ import { HintsController } from './hints.controller';
 
 @Module({
   controllers: [HintsController],
-  providers: [HintsService]
+  providers: [HintsService],
 })
 export class HintsModule {}
