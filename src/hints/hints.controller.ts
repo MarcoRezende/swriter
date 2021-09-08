@@ -1,9 +1,7 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { HintsService } from './hints.service';
 import { Hint } from './entities/hint.entity';
-import { Crud, CrudController, CrudRequest } from '@nestjsx/crud';
-import { GENRES } from 'src/genre/models/genre.model';
-import { getManager } from 'typeorm';
+import { Crud, CrudController } from '@nestjsx/crud';
 
 @Crud({
   model: {
