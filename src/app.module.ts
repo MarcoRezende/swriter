@@ -6,6 +6,8 @@ import { HintsModule } from './hints/hints.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GenreModule } from './genre/genre.module';
+import { SentenceModule } from './sentence/sentence.module';
+import { MoodModule } from './mood/mood.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { GenreModule } from './genre/genre.module';
     }),
     HintsModule,
     GenreModule,
+    SentenceModule,
+    MoodModule,
   ],
   controllers: [AppController],
   providers: [AppService],
