@@ -7,11 +7,6 @@ import { SentenceService } from './sentence.service';
   model: {
     type: Sentence,
   },
-  query: {
-    join: {
-      genres: { eager: true },
-    },
-  },
   params: {
     id: {
       field: 'id',
@@ -21,6 +16,6 @@ import { SentenceService } from './sentence.service';
   },
 })
 @Controller('sentence')
-export class GenreController implements CrudController<Sentence> {
+export class SentenceController implements CrudController<Sentence> {
   constructor(public service: SentenceService) {}
 }

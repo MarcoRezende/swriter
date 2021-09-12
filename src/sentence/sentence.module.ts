@@ -1,4 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Sentence } from './entities/sentence.entity';
+import { SentenceController } from './sentence.controller';
+import { SentenceService } from './sentence.service';
 
-@Module({})
+@Module({
+  imports: [TypeOrmModule.forFeature([Sentence])],
+  providers: [SentenceService],
+  controllers: [SentenceController],
+})
 export class SentenceModule {}
