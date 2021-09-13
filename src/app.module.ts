@@ -5,9 +5,7 @@ import { configValidationSchema } from './config/config.schema';
 import { HintsModule } from './hints/hints.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GenreModule } from './genre/genre.module';
-import { SentenceModule } from './sentence/sentence.module';
-import { MoodModule } from './mood/mood.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -32,9 +30,7 @@ import { MoodModule } from './mood/mood.module';
       },
     }),
     HintsModule,
-    GenreModule,
-    SentenceModule,
-    MoodModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
