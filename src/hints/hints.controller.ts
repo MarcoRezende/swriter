@@ -9,7 +9,7 @@ import { Crud, CrudController } from '@nestjsx/crud';
   },
   query: {
     join: {
-      genres: { eager: true },
+      categories: { eager: true },
     },
   },
   params: {
