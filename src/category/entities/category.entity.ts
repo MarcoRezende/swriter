@@ -13,7 +13,7 @@ export class Category extends BaseEntity<Category> {
   hint: Hint;
 
   @IsString()
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   name: string;
 
   @IsString()
