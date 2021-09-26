@@ -6,6 +6,7 @@ import { HintsModule } from './hints/hints.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryModule } from './category/category.module';
+import { ThemeModule } from './theme/theme.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { CategoryModule } from './category/category.module';
     }),
     HintsModule,
     CategoryModule,
+    ThemeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
