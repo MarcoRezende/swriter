@@ -15,7 +15,7 @@ import { ThemeService } from './theme.service';
     },
   },
 })
-@Controller('themes')
+@Controller('theme')
 export class ThemeController implements CrudController<Theme> {
   constructor(public service: ThemeService) {}
 }

@@ -20,7 +20,7 @@ import { Crud, CrudController } from '@nestjsx/crud';
     },
   },
 })
-@Controller('hints')
+@Controller('hint')
 export class HintsController implements CrudController<Hint> {
   constructor(public service: HintsService) {}
 }

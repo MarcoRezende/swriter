@@ -16,7 +16,7 @@ import { CategoryService } from './category.service';
     },
   },
 })
-@Controller('Category')
+@Controller('category')
 export class CategoryController implements CrudController<Category> {
   constructor(public service: CategoryService) {}
 }
