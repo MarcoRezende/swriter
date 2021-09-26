@@ -18,5 +18,5 @@ export class Category extends BaseEntity<Category> {
 
   @IsString()
   @Column({ nullable: false })
-  kind: string;
+  theme: string;
 }
