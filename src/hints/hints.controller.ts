@@ -1,11 +1,19 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { HintsService } from './hints.service';
 import { Hint } from './entities/hint.entity';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Crud, CrudController, Override } from '@nestjsx/crud';
 
 @Crud({
   model: {
     type: Hint,
+  },
+  routes: {
+    createOneBase: {},
+    createManyBase: {},
+    getOneBase: {},
+    getManyBase: {},
+    updateOneBase: {},
+    deleteOneBase: {},
   },
   query: {
     join: {
