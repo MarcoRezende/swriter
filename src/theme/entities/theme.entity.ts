@@ -6,7 +6,6 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 @Entity()
 export class Theme extends BaseEntity<Theme> {
   @ManyToOne(type => Category, hint => hint.theme, {
-    eager: true,
     onDelete: 'SET NULL',
     nullable: true,
   })
