@@ -7,7 +7,6 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 @Entity()
 export class Category extends BaseEntity<Category> {
   @ManyToOne(type => Hint, hint => hint.categories, {
-    eager: true,
     onDelete: 'SET NULL',
     nullable: true,
   })
