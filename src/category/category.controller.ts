@@ -1,8 +1,8 @@
-import { Body, Controller, ForbiddenException } from '@nestjs/common';
-import { Crud, CrudController, Override } from '@nestjsx/crud';
-import { getManager } from 'typeorm';
-import { Category } from './entities/category.entity';
+import { Controller } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
+
 import { CategoryService } from './category.service';
+import { Category } from './entities/category.entity';
 
 @Crud({
   model: {
