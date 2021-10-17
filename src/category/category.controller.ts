@@ -8,6 +8,14 @@ import { CategoryService } from './category.service';
   model: {
     type: Category,
   },
+  routes: {
+    createOneBase: {},
+    createManyBase: {},
+    getOneBase: {},
+    getManyBase: {},
+    updateOneBase: {},
+    deleteOneBase: {},
+  },
   params: {
     id: {
       field: 'id',

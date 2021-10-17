@@ -7,6 +7,14 @@ import { ThemeService } from './theme.service';
   model: {
     type: Theme,
   },
+  routes: {
+    createOneBase: {},
+    createManyBase: {},
+    getOneBase: {},
+    getManyBase: {},
+    updateOneBase: {},
+    deleteOneBase: {},
+  },
   params: {
     id: {
       field: 'id',
