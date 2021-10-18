@@ -23,6 +23,7 @@ import { Category } from './entities/category.entity';
       primary: true,
     },
   },
+  query: { join: { theme: { eager: true } } },
 })
 @Controller('category')
 export class CategoryController implements CrudController<Category> {
