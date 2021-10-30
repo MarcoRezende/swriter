@@ -1,7 +1,7 @@
-import { Body, Controller } from '@nestjs/common';
+import { BadRequestException, Controller } from '@nestjs/common';
 import { HintsService } from './hints.service';
 import { Hint } from './entities/hint.entity';
-import { Crud, CrudController, Override } from '@nestjsx/crud';
+import { Crud, CrudController } from '@nestjsx/crud';
 
 @Crud({
   model: {
@@ -27,6 +27,7 @@ import { Crud, CrudController, Override } from '@nestjsx/crud';
       primary: true,
     },
   },
+  validation: { exceptionFactory: errors => new BadRequestException(errors) },
 })
 @Controller('hint')
 export class HintsController implements CrudController<Hint> {
