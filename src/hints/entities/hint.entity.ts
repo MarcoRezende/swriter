@@ -31,9 +31,4 @@ export class Hint extends BaseEntity<Hint> {
   @IsBoolean()
   @Column({ nullable: true, default: false })
   bookmarked?: boolean;
-
-  @AfterLoad()
-  updateTimesDrawn() {
-    this.timesDrawn++;
-  }
 }

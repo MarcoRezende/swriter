@@ -1,7 +1,10 @@
-import { BadRequestException, Controller } from '@nestjs/common';
-import { HintsService } from './hints.service';
-import { Hint } from './entities/hint.entity';
+import { getManager } from 'typeorm';
+
+import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
+
+import { Hint } from './entities/hint.entity';
+import { HintsService } from './hints.service';
 
 @Crud({
   model: {
@@ -32,4 +35,14 @@ import { Crud, CrudController } from '@nestjsx/crud';
 @Controller('hint')
 export class HintsController implements CrudController<Hint> {
   constructor(public service: HintsService) {}
+
+  @Get('random')
+  async getRandomHint(): Promise<Hint> {
+    const hint = await this.service.getRandom(getManager());
+
+    return this.service.repo.save({
+      ...hint,
+      timesDrawn: hint.timesDrawn + 1,
+    });
+  }
 }
