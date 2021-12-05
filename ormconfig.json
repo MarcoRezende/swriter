@@ -1,0 +1,17 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": "3306",
+  "username": "root",
+  "password": "",
+  "database": "swriter",
+  "entities": ["dist/**/*.entity.js"],
+  "subscribers": ["dist/**/*.subscriber.js"],
+  "migrations": ["dist/src/_migrations/*.js"],
+  "cli": {
+    "migrationsDir": "src/_migrations"
+  },
+  "synchronize": false,
+  "logging": ["error"],
+  "timezone": "+00:00"
+}
