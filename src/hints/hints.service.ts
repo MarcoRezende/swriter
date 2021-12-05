@@ -17,6 +17,6 @@ export class HintsService extends TypeOrmCrudService<Hint> {
       .createQueryBuilder(Hint, 'hint')
       .leftJoinAndSelect('hint.categories', 'categories')
       .orderBy('RAND()')
-      .getOne();
+      .getOneOrFail();
   }
 }
