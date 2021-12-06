@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
-import { HintsService } from './hints.service';
-import { HintsController } from './hints.controller';
-import { Hint } from './entities/hint.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CsvParserService } from '../csv-parser/csv-parse.service';
+
+import { Hint } from './entities/hint.entity';
+import { HintsController } from './hints.controller';
+import { HintsService } from './hints.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Hint])],
+  imports: [TypeOrmModule.forFeature([Hint]), CsvParserService],
   controllers: [HintsController],
-  providers: [HintsService],
+  providers: [HintsService, CsvParserService],
 })
 export class HintsModule {}

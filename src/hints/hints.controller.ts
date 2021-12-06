@@ -1,11 +1,20 @@
 import { getManager } from 'typeorm';
 
-import { BadRequestException, Controller, Get } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
+import { diskStorage } from 'multer';
 @Crud({
   model: {
     type: Hint,
@@ -44,5 +53,13 @@ export class HintsController implements CrudController<Hint> {
       ...hint,
       timesDrawn: hint.timesDrawn + 1,
     });
+  }
+
+  @Post('importCsv')
+  @UseInterceptors(
+    FileInterceptor('file', { storage: diskStorage({ destination: './tmp' }) }),
+  )
+  async importCsv(@UploadedFile() file: Express.Multer.File) {
+    await this.service.parseCsv(file);
   }
 }
