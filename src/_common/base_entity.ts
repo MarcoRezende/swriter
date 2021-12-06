@@ -4,7 +4,6 @@ import {
   UpdateDateColumn,
   DeepPartial,
 } from 'typeorm';
-import { Exclude, Expose } from 'class-transformer';
 import { IsInt } from 'class-validator';
 
 export class BaseEntity<T> {
@@ -16,14 +15,9 @@ export class BaseEntity<T> {
   @PrimaryGeneratedColumn('uuid')
   id?: string;
 
-  @Expose({ groups: ['showDate'] })
   @CreateDateColumn()
   createdDate?: Date;
 
-  @Exclude()
   @UpdateDateColumn()
   updatedDate?: Date;
-
-  @Exclude()
-  _doNotValidate: boolean;
 }
