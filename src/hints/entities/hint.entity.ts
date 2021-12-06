@@ -13,7 +13,7 @@ export class Hint extends BaseEntity<Hint> {
   @JoinTable()
   categories: Category[];
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   tip: string;
 
   @IsOptional()
