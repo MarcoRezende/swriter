@@ -1,5 +1,6 @@
-import { BadRequestException, Controller } from '@nestjs/common';
+import { BadRequestException, Controller, Delete } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
+import { DeleteResult } from 'typeorm';
 import { Theme } from './entities/theme.entity';
 import { ThemeService } from './theme.service';
 
@@ -31,4 +32,13 @@ import { ThemeService } from './theme.service';
 @Controller('theme')
 export class ThemeController implements CrudController<Theme> {
   constructor(public service: ThemeService) {}
+
+  @Delete()
+  async deleteAll(): Promise<DeleteResult> {
+    return await this.service.repo
+      .createQueryBuilder('theme')
+      .delete()
+      .where('id IS NOT NULL')
+      .execute();
+  }
 }

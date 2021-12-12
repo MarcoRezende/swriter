@@ -1,4 +1,3 @@
-import * as fileSystem from 'fs';
 import { EntityManager, getManager, getRepository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
