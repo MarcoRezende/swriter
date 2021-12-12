@@ -4,6 +4,10 @@ version: '3.7'
 services:
   swriter_database:
     image: mysql
+    cap_add:
+      - SYS_NICE
+    security_opt:
+      - seccomp:unconfined
     container_name: swriter_database
     restart: always
     ports:
@@ -11,21 +15,20 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=swriter
-      - MYSQL_USER=root
 
     volumes:
       - pgdata:/data/mysql
-#   app:
-#     build: .
-#     container_name: rentx
-#     ports:
-#       - 3333:3333
-#     volumes:
-#       - .:/usr/app
-#     links:
-#       - database_ignite
-#     depends_on:
-#       - database_ignite
+  app:
+    build: .
+    container_name: swriter_app
+    ports:
+      - 8090:8090
+    volumes:
+      - .:/usr/app
+    links:
+      - swriter_database
+    depends_on:
+      - swriter_database
 
 volumes:
   pgdata:

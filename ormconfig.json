@@ -1,8 +1,8 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "swriter_database",
   "port": "3306",
-  "username": "root",
+  "username": "",
   "password": "",
   "database": "swriter",
   "entities": ["dist/**/*.entity.js"],
