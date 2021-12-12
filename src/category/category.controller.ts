@@ -8,6 +8,11 @@ import { Category } from './entities/category.entity';
   model: {
     type: Category,
   },
+  query: {
+    alwaysPaginate: true,
+    maxLimit: 50,
+    join: { theme: { eager: true } },
+  },
   routes: {
     createOneBase: {},
     createManyBase: {},
@@ -23,7 +28,6 @@ import { Category } from './entities/category.entity';
       primary: true,
     },
   },
-  query: { join: { theme: { eager: true } } },
   validation: { exceptionFactory: errors => new BadRequestException(errors) },
 })
 @Controller('category')

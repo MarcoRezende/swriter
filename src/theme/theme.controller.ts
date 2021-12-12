@@ -7,6 +7,10 @@ import { ThemeService } from './theme.service';
   model: {
     type: Theme,
   },
+  query: {
+    alwaysPaginate: true,
+    maxLimit: 50,
+  },
   routes: {
     createOneBase: {},
     createManyBase: {},
