@@ -28,6 +28,8 @@ import { diskStorage } from 'multer';
     deleteOneBase: {},
   },
   query: {
+    alwaysPaginate: true,
+    maxLimit: 50,
     join: {
       categories: { eager: true },
     },
