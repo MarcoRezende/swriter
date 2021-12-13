@@ -1,4 +1,8 @@
 import { diskStorage } from 'multer';
+import {
+  DescriptionProps,
+  entityDescription,
+} from 'src/_common/decorators/describe';
 import { DeleteResult, getManager } from 'typeorm';
 
 import {
@@ -47,6 +51,11 @@ import { HintsService } from './hints.service';
 @Controller('hint')
 export class HintsController implements CrudController<Hint> {
   constructor(public service: HintsService) {}
+
+  @Get('entityDescription')
+  async entityDescription(): Promise<DescriptionProps[]> {
+    return entityDescription(Hint);
+  }
 
   @Get('random')
   async getRandomHint(): Promise<Hint> {

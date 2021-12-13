@@ -1,6 +1,11 @@
-import { BadRequestException, Controller, Delete } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import {
+  DescriptionProps,
+  entityDescription,
+} from 'src/_common/decorators/describe';
 import { DeleteResult } from 'typeorm';
+
+import { BadRequestException, Controller, Delete, Get } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
 
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
@@ -34,6 +39,11 @@ import { Category } from './entities/category.entity';
 @Controller('category')
 export class CategoryController implements CrudController<Category> {
   constructor(public service: CategoryService) {}
+
+  @Get('entityDescription')
+  async entityDescription(): Promise<DescriptionProps[]> {
+    return entityDescription(Category);
+  }
 
   @Delete()
   async deleteAll(): Promise<DeleteResult> {

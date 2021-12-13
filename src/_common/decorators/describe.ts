@@ -12,7 +12,7 @@ interface GenericObject {
   [key: string]: any;
 }
 
-interface DescriptionProps {
+export interface DescriptionProps {
   subject: string;
   key: string;
   relation: RelationType;
@@ -35,7 +35,9 @@ export function Description(description: AtLeast<DescriptionProps, 'subject'>) {
   };
 }
 
-export function entityDescription(TargetEntity: GenericEntity) {
+export function entityDescription(
+  TargetEntity: GenericEntity,
+): DescriptionProps[] {
   const metadataDescriptions =
     Reflect.getMetadata(metadataKey, new TargetEntity()) ?? [];
 
