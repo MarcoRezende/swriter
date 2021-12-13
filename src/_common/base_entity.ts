@@ -1,5 +1,6 @@
 import { IsInt } from 'class-validator';
 import {
+  BeforeUpdate,
   CreateDateColumn,
   DeepPartial,
   PrimaryGeneratedColumn,
@@ -21,7 +22,12 @@ export class BaseEntity<T> {
   @Description({ subject: 'Criado', type: 'dateTime' })
   createdDate?: Date;
 
-  @UpdateDateColumn()
   @Description({ subject: 'Atualizado', type: 'dateTime' })
   updatedDate?: Date;
+
+  @BeforeUpdate()
+  updateDate() {
+    // updates even when relation gets updated
+    this.updatedDate = new Date();
+  }
 }
