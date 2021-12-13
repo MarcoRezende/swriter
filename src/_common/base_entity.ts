@@ -1,10 +1,12 @@
-import {
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeepPartial,
-} from 'typeorm';
 import { IsInt } from 'class-validator';
+import {
+  CreateDateColumn,
+  DeepPartial,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+import { Description } from './decorators/describe';
 
 export class BaseEntity<T> {
   constructor(obj?: DeepPartial<T>) {
@@ -16,8 +18,10 @@ export class BaseEntity<T> {
   id?: string;
 
   @CreateDateColumn()
+  @Description({ subject: 'Criado', type: 'dateTime' })
   createdDate?: Date;
 
   @UpdateDateColumn()
+  @Description({ subject: 'Atualizado', type: 'dateTime' })
   updatedDate?: Date;
 }
