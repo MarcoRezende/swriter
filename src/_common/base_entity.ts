@@ -10,8 +10,7 @@ import { Description } from './decorators/describe';
 
 export class BaseEntity<T> {
   constructor(obj?: DeepPartial<T>) {
-    // updates even when relation gets updated
-    Object.assign(this, { ...obj, updatedDate: new Date() });
+    Object.assign(this, obj);
   }
 
   @IsInt()
