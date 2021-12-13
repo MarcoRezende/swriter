@@ -1,6 +1,5 @@
 import { IsInt } from 'class-validator';
 import {
-  BeforeUpdate,
   CreateDateColumn,
   DeepPartial,
   PrimaryGeneratedColumn,
@@ -11,7 +10,8 @@ import { Description } from './decorators/describe';
 
 export class BaseEntity<T> {
   constructor(obj?: DeepPartial<T>) {
-    Object.assign(this, obj);
+    // updates even when relation gets updated
+    Object.assign(this, { ...obj, updatedDate: new Date() });
   }
 
   @IsInt()
@@ -22,12 +22,7 @@ export class BaseEntity<T> {
   @Description({ subject: 'Criado', type: 'dateTime' })
   createdDate?: Date;
 
+  @UpdateDateColumn({ update: true })
   @Description({ subject: 'Atualizado', type: 'dateTime' })
   updatedDate?: Date;
-
-  @BeforeUpdate()
-  updateDate() {
-    // updates even when relation gets updated
-    this.updatedDate = new Date();
-  }
 }
