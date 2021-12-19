@@ -15,6 +15,11 @@ export class Theme extends BaseEntity<Theme> {
 
   @IsString()
   @Column({ nullable: false, unique: true })
-  @Description({ subject: 'Nome' })
+  @Description(Theme, {
+    subject: 'Nome',
+    type: 'text',
+    placeholder: 'nome do tema',
+    rules: { required: true },
+  })
   name: string;
 }

@@ -13,7 +13,6 @@ export class Category extends BaseEntity<Category> {
     nullable: false,
     cascade: true,
   })
-  @Description({ subject: 'Categorias' })
   hint: Hint;
 
   @ManyToOne(type => Theme, theme => theme.categories, {
@@ -22,11 +21,21 @@ export class Category extends BaseEntity<Category> {
     onUpdate: 'NO ACTION',
     nullable: false,
   })
-  @Description({ subject: 'Tema' })
+  @Description(Category, {
+    subject: 'Tema',
+    type: 'select',
+    placeholder: 'tema',
+    rules: { required: true },
+  })
   theme: Theme;
 
   @IsString()
   @Column({ nullable: false, unique: true })
-  @Description({ subject: 'Nome' })
+  @Description(Category, {
+    subject: 'Nome',
+    type: 'text',
+    placeholder: 'nome da categoria',
+    rules: { required: true },
+  })
   name: string;
 }
