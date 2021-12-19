@@ -18,10 +18,10 @@ export class BaseEntity<T> {
   id?: string;
 
   @CreateDateColumn()
-  @Description({ subject: 'Criado', type: 'dateTime' })
+  @Description(BaseEntity, { subject: 'Criado', type: 'dateTime' })
   createdDate?: Date;
 
   @UpdateDateColumn({ update: true })
-  @Description({ subject: 'Atualizado', type: 'dateTime' })
+  @Description(BaseEntity, { subject: 'Atualizado', type: 'dateTime' })
   updatedDate?: Date;
 }

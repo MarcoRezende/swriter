@@ -1,6 +1,7 @@
+import { RegisterOptions } from 'react-hook-form';
 import { getMetadataArgsStorage } from 'typeorm';
-import { RelationTypeInFunction } from 'typeorm/metadata/types/RelationTypeInFunction';
 import { RelationType } from 'typeorm/metadata/types/RelationTypes';
+import { BaseEntity } from '../base_entity';
 
 type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
 
@@ -14,14 +15,20 @@ interface GenericObject {
 
 export interface DescriptionProps {
   subject: string;
-  key: string;
-  relation: RelationType;
-  type: 'dateTime';
+  key?: string;
+  relation?: RelationType;
+  type?: 'dateTime' | 'text' | 'textarea' | 'select' | 'multi-select' | 'radio';
+  selectKey?: string;
+  placeholder?: string;
+  rules?: RegisterOptions;
 }
 
 const metadataKey = Symbol('entity:description');
 
-export function Description(description: AtLeast<DescriptionProps, 'subject'>) {
+export function Description(
+  target: GenericObject,
+  description: DescriptionProps,
+) {
   return (TargetEntity: GenericObject, targetEntityKey: string) => {
     const descriptionList =
       Reflect.getMetadata(metadataKey, TargetEntity) ?? [];
@@ -29,6 +36,10 @@ export function Description(description: AtLeast<DescriptionProps, 'subject'>) {
     descriptionList.push({
       ...description,
       key: targetEntityKey,
+      target,
+      rules: {
+        required: description.rules?.required ? 'Campo obrigatório' : false,
+      },
     });
 
     Reflect.defineMetadata(metadataKey, descriptionList, TargetEntity);
@@ -44,17 +55,21 @@ export function entityDescription(
   const { relations } = getMetadataArgsStorage();
 
   // insere informações extras a descrição
-  return metadataDescriptions.map((metadata: any) => {
+  return metadataDescriptions.reduce((data: any[], metadata: any) => {
     const relation = relations.find(
       (relation: any) => metadata.key === relation.propertyName,
     );
 
-    if (relation?.relationType) {
-      Object.assign(metadata, {
-        relation: relation.relationType,
-      });
+    if (metadata.target === TargetEntity || metadata.target === BaseEntity) {
+      if (relation?.relationType) {
+        Object.assign(metadata, {
+          relation: relation.relationType,
+        });
+      }
+
+      data.push(metadata);
     }
 
-    return metadata;
-  });
+    return data;
+  }, []);
 }
