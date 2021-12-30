@@ -10,7 +10,9 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -19,6 +21,7 @@ import { Crud, CrudController } from '@nestjsx/crud';
 
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
+import { RequestQueryParser } from '@nestjsx/crud-request';
 
 @Crud({
   model: {
@@ -37,6 +40,7 @@ import { HintsService } from './hints.service';
     maxLimit: 50,
     join: {
       categories: { eager: true },
+      'categories.theme': { eager: true },
     },
   },
   params: {
@@ -58,8 +62,8 @@ export class HintsController implements CrudController<Hint> {
   }
 
   @Get('random')
-  async getRandomHint(): Promise<Hint> {
-    const hint = await this.service.getRandom(getManager());
+  async getRandomHint(@Query('filter') filters?: string[]): Promise<Hint> {
+    const hint = await this.service.getRandom(getManager(), filters);
 
     return this.service.repo.save({
       ...hint,
