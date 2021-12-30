@@ -80,6 +80,7 @@ export class CsvParserService {
       .into(EntityTarget)
       .values(values)
       .getQueryAndParameters();
+
     query = query.replace('INSERT', 'INSERT IGNORE');
 
     await manager.query(query, params);
