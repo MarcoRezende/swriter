@@ -29,7 +29,7 @@ export class Hint extends BaseEntity<Hint> {
 
   @IsNotEmpty({ always: true })
   @Length(5, 1000)
-  @Column({ nullable: false, unique: true, length: 1000 })
+  @Column({ nullable: false, unique: true, type: 'varchar', length: 500 })
   @Description(Hint, {
     subject: 'Dica',
     type: 'textarea',
