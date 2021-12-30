@@ -10,7 +10,6 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Query,
   UploadedFile,
@@ -21,7 +20,6 @@ import { Crud, CrudController } from '@nestjsx/crud';
 
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
-import { RequestQueryParser } from '@nestjsx/crud-request';
 
 @Crud({
   model: {
@@ -37,7 +35,7 @@ import { RequestQueryParser } from '@nestjsx/crud-request';
   },
   query: {
     alwaysPaginate: true,
-    maxLimit: 50,
+    // maxLimit: 50,
     join: {
       categories: { eager: true },
       'categories.theme': { eager: true },
