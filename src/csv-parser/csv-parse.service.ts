@@ -58,7 +58,7 @@ export class CsvParserService {
           promises.unlink(file.path); // remove o arquivo especificado
 
           if (options?.insertIntoTable) {
-            this.insert<K>(manager, entities, EntityTarget, headers);
+            this.insert<K>(manager, entities, EntityTarget);
           }
 
           resolve(entities);
@@ -73,17 +73,15 @@ export class CsvParserService {
     manager: EntityManager,
     values: K[],
     EntityTarget: Entity<K>,
-    headers: string[],
   ) {
-    await manager
+    let [query, params] = manager
       .createQueryBuilder()
       .insert()
       .into(EntityTarget)
       .values(values)
-      .orUpdate({
-        conflict_target: headers,
-        overwrite: headers,
-      })
-      .execute();
+      .getQueryAndParameters();
+    query = query.replace('INSERT', 'INSERT IGNORE');
+
+    await manager.query(query, params);
   }
 }
