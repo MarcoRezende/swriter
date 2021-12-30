@@ -1,4 +1,11 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { Category } from 'src/category/entities/category.entity';
 import { BaseEntity } from 'src/_common/base_entity';
 import { Description } from 'src/_common/decorators/describe';
@@ -20,7 +27,9 @@ export class Hint extends BaseEntity<Hint> {
   })
   categories: Category[];
 
-  @Column({ nullable: false, unique: true })
+  @IsNotEmpty({ always: true })
+  @Length(5, 1000)
+  @Column({ nullable: false, unique: true, length: 1000 })
   @Description(Hint, {
     subject: 'Dica',
     type: 'textarea',
@@ -43,7 +52,7 @@ export class Hint extends BaseEntity<Hint> {
   @IsString()
   @Column({ nullable: true })
   @Description(Hint, {
-    subject: 'livro',
+    subject: 'Livro',
     type: 'text',
     placeholder: 'obra',
   })
