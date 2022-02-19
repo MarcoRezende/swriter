@@ -35,7 +35,7 @@ import { HintsService } from './hints.service';
   },
   query: {
     alwaysPaginate: true,
-    // maxLimit: 50,
+    maxLimit: 50,
     join: {
       categories: { eager: true },
       'categories.theme': { eager: true },
