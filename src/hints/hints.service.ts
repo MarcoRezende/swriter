@@ -1,11 +1,10 @@
-import { EntityManager, getManager, getRepository } from 'typeorm';
-
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { EntityManager, getManager, getRepository } from 'typeorm';
 
-import { Hint } from './entities/hint.entity';
 import { CsvParserService } from '../csv-parser/csv-parse.service';
+import { Hint } from './entities/hint.entity';
 
 @Injectable()
 export class HintsService extends TypeOrmCrudService<Hint> {
