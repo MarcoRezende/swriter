@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { configValidationSchema } from './config/config.schema';
-import { HintsModule } from './hints/hints.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
+import { configValidationSchema } from './config/config.schema';
+import { HintsModule } from './hints/hints.module';
 import { ThemeModule } from './theme/theme.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -33,6 +36,8 @@ import { ThemeModule } from './theme/theme.module';
     HintsModule,
     CategoryModule,
     ThemeModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
