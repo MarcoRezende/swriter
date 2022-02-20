@@ -1,9 +1,8 @@
-import { RegisterOptions } from 'react-hook-form';
+import { RegisterOptions } from 'src/types/react-hook-form';
 import { getMetadataArgsStorage } from 'typeorm';
 import { RelationType } from 'typeorm/metadata/types/RelationTypes';
-import { BaseEntity } from '../base_entity';
 
-type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
+import { BaseEntity } from '../base_entity';
 
 interface GenericEntity {
   new (...args: any): any;
