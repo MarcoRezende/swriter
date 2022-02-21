@@ -1,6 +1,4 @@
 import {
-  BadRequestException,
-  Controller,
   Delete,
   Get,
   Post,
@@ -10,8 +8,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { CrudController } from '@nestjsx/crud';
 import { diskStorage } from 'multer';
+import { AppController } from 'src/_common/decorators/app-controller.decorator';
 import { RoleGuard } from 'src/auth/role.guard';
 import { UserRole } from 'src/user/entities/user.entity';
 import { DeleteResult, getManager } from 'typeorm';
@@ -24,36 +23,14 @@ import { AuthGuard } from '../auth/auth.guard';
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
 
-@Crud({
-  model: {
-    type: Hint,
-  },
-  routes: {
-    createOneBase: {},
-    createManyBase: {},
-    getOneBase: {},
-    getManyBase: {},
-    updateOneBase: {},
-    deleteOneBase: {},
-  },
+@AppController(Hint, 'hint', {
   query: {
-    alwaysPaginate: true,
-    maxLimit: 50,
     join: {
       categories: { eager: true },
       'categories.theme': { eager: true },
     },
   },
-  params: {
-    id: {
-      field: 'id',
-      type: 'string',
-      primary: true,
-    },
-  },
-  validation: { exceptionFactory: errors => new BadRequestException(errors) },
 })
-@Controller('hint')
 export class HintsController implements CrudController<Hint> {
   constructor(public service: HintsService) {}
 
