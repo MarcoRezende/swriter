@@ -18,7 +18,7 @@ import { DeleteResult, getManager } from 'typeorm';
 import {
   DescriptionProps,
   entityDescription,
-} from '../_common/decorators/describe';
+} from '../_common/decorators/description.decorator';
 import { AuthGuard } from '../auth/auth.guard';
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';

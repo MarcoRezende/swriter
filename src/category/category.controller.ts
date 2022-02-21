@@ -1,11 +1,10 @@
+import { BadRequestException, Controller, Delete, Get } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
 import {
   DescriptionProps,
   entityDescription,
-} from 'src/_common/decorators/describe';
+} from 'src/_common/decorators/description.decorator';
 import { DeleteResult } from 'typeorm';
-
-import { BadRequestException, Controller, Delete, Get } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
 
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';

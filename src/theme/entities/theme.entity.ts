@@ -1,7 +1,7 @@
 import { IsString } from 'class-validator';
-import { Category } from 'src/category/entities/category.entity';
 import { BaseEntity } from 'src/_common/base_entity';
-import { Description } from 'src/_common/decorators/describe';
+import { Description } from 'src/_common/decorators/description.decorator';
+import { Category } from 'src/category/entities/category.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()

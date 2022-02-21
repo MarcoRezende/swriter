@@ -2,7 +2,7 @@ import { hash } from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { IsEmail, IsEnum, Length } from 'class-validator';
 import { BaseEntity } from 'src/_common/base_entity';
-import { Description } from 'src/_common/decorators/describe';
+import { Description } from 'src/_common/decorators/description.decorator';
 import { BeforeInsert, Column, Entity } from 'typeorm';
 
 export class UserRole {
