@@ -1,12 +1,29 @@
 import { hash } from 'bcrypt';
 import { Exclude } from 'class-transformer';
-import { IsEmail, Length } from 'class-validator';
+import { IsEmail, IsEnum, Length } from 'class-validator';
 import { BaseEntity } from 'src/_common/base_entity';
 import { Description } from 'src/_common/decorators/describe';
 import { BeforeInsert, Column, Entity } from 'typeorm';
 
+export class UserRole {
+  @Description({}, { subject: 'Usuário' })
+  static readonly USER: 'USER';
+
+  @Description({}, { subject: 'Administrador' })
+  static readonly ADMIN: 'ADMIN';
+}
+
 @Entity()
 export class User extends BaseEntity<User> {
+  @IsEnum(UserRole, { always: true })
+  @Column({ type: 'enum', nullable: false })
+  @Description(User, {
+    subject: 'Tipo',
+    placeholder: 'tipo',
+    rules: { required: true },
+  })
+  role: UserRole;
+
   @Length(3, 75)
   @Column({ type: 'varchar', length: 75, nullable: false })
   @Description(User, {
