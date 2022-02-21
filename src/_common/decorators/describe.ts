@@ -28,7 +28,7 @@ export function Description(
   target: GenericObject,
   description: DescriptionProps,
 ) {
-  return (TargetEntity: GenericObject, targetEntityKey: string) => {
+  return (TargetEntity: GenericObject = null, targetEntityKey: string) => {
     const descriptionList =
       Reflect.getMetadata(metadataKey, TargetEntity) ?? [];
 
