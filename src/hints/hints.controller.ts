@@ -6,17 +6,21 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { diskStorage } from 'multer';
+import { RoleGuard } from 'src/auth/role.guard';
+import { UserRole } from 'src/user/entities/user.entity';
+import { DeleteResult, getManager } from 'typeorm';
+
 import {
   DescriptionProps,
   entityDescription,
-} from 'src/_common/decorators/describe';
-import { DeleteResult, getManager } from 'typeorm';
-
+} from '../_common/decorators/describe';
+import { AuthGuard } from '../auth/auth.guard';
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
 
@@ -58,6 +62,7 @@ export class HintsController implements CrudController<Hint> {
     return entityDescription(Hint);
   }
 
+  @UseGuards(AuthGuard, new RoleGuard([UserRole.ADMIN]))
   @Get('random')
   async getRandomHint(@Query('filter') filters?: string[]): Promise<Hint> {
     const hint = await this.service.getRandom(getManager(), filters);
