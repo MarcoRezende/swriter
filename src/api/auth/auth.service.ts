@@ -9,9 +9,9 @@ import {
   tokenExpiresIn,
   refreshTokenExpiresIn,
 } from 'src/config/auth';
-import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 
+import { User } from '../user/entities/user.entity';
 import { LoginResponse } from './dtos/login-response.dto';
 
 export class AuthService extends TypeOrmCrudService<User> {

@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { Description } from './decorators/describe';
+import { Description } from './decorators/description.decorator';
 
 export class BaseEntity<T> {
   constructor(obj?: DeepPartial<T>) {

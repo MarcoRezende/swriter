@@ -1,22 +1,22 @@
+import { BadRequestException, Controller, Delete, Get } from '@nestjs/common';
+import { Crud, CrudController } from '@nestjsx/crud';
 import {
   DescriptionProps,
   entityDescription,
-} from 'src/_common/decorators/describe';
+} from 'src/_common/decorators/description.decorator';
 import { DeleteResult } from 'typeorm';
 
-import { BadRequestException, Controller, Delete, Get } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
-
-import { Theme } from './entities/theme.entity';
-import { ThemeService } from './theme.service';
+import { CategoryService } from './category.service';
+import { Category } from './entities/category.entity';
 
 @Crud({
   model: {
-    type: Theme,
+    type: Category,
   },
   query: {
     alwaysPaginate: true,
     maxLimit: 50,
+    join: { theme: { eager: true } },
   },
   routes: {
     createOneBase: {},
@@ -35,13 +35,13 @@ import { ThemeService } from './theme.service';
   },
   validation: { exceptionFactory: errors => new BadRequestException(errors) },
 })
-@Controller('theme')
-export class ThemeController implements CrudController<Theme> {
-  constructor(public service: ThemeService) {}
+@Controller('category')
+export class CategoryController implements CrudController<Category> {
+  constructor(public service: CategoryService) {}
 
   @Get('entityDescription')
   async entityDescription(): Promise<DescriptionProps[]> {
-    return entityDescription(Theme);
+    return entityDescription(Category);
   }
 
   @Delete()

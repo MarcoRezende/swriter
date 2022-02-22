@@ -1,8 +1,8 @@
 import { IsString } from 'class-validator';
+import { BaseEntity } from 'src/_common/base_entity';
+import { Description } from 'src/_common/decorators/description.decorator';
 import { Hint } from 'src/hints/entities/hint.entity';
 import { Theme } from 'src/theme/entities/theme.entity';
-import { BaseEntity } from 'src/_common/base_entity';
-import { Description } from 'src/_common/decorators/describe';
 import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 
 @Entity()
