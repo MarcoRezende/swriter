@@ -1,6 +1,6 @@
+import { User } from '@api/user/entities/user.entity';
 import { classToClass } from 'class-transformer';
 
-import { User } from '../../user/entities/user.entity';
 import { AuthenticatedUser } from '../dtos/authenticated-user.dto';
 
 export class UserMap {

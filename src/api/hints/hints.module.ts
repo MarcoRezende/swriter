@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CsvParserService } from 'src/services/csv-parser/csv-parse.service';
+import { CsvParserService } from '@services/csv-parser';
 
 import { Hint } from './entities/hint.entity';
 import { HintsController } from './hints.controller';

@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { CsvParserService } from '@services/csv-parser';
 import { EntityManager, getManager, getRepository } from 'typeorm';
 
-import { CsvParserService } from '../../services/csv-parser/csv-parse.service';
 import { Hint } from './entities/hint.entity';
 
 @Injectable()
