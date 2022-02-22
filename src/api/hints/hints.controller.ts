@@ -11,15 +11,15 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CrudController } from '@nestjsx/crud';
 import { diskStorage } from 'multer';
 import { AppController } from 'src/_common/decorators/app-controller.decorator';
-import { RoleGuard } from 'src/auth/role.guard';
-import { UserRole } from 'src/user/entities/user.entity';
 import { DeleteResult, getManager } from 'typeorm';
 
 import {
   DescriptionProps,
   entityDescription,
-} from '../_common/decorators/description.decorator';
+} from '../../_common/decorators/description.decorator';
 import { AuthGuard } from '../auth/auth.guard';
+import { RoleGuard } from '../auth/role.guard';
+import { UserRole } from '../user/entities/user.entity';
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
 

@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { promises, createReadStream } from 'fs';
 import { parse } from 'csv-parse';
+import { promises, createReadStream } from 'fs';
 import { EntityManager } from 'typeorm';
 
 interface Entity<T> {
@@ -14,15 +14,12 @@ interface Options {
 
 @Injectable()
 export class CsvParserService {
-  constructor() {}
-
   async parseCsv<K = any>(
     manager: EntityManager,
     file: Express.Multer.File,
     EntityTarget: Entity<K>,
     options?: Options,
   ): Promise<K[]> {
-    new EntityTarget();
     return new Promise(resolve => {
       const entities: K[] = [];
       const stream = createReadStream(file.path);
@@ -74,6 +71,7 @@ export class CsvParserService {
     values: K[],
     EntityTarget: Entity<K>,
   ) {
+    // eslint-disable-next-line prefer-const
     let [query, params] = manager
       .createQueryBuilder()
       .insert()

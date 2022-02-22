@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { AuthModule } from './api/auth/auth.module';
+import { CategoryModule } from './api/category/category.module';
+import { HintsModule } from './api/hints/hints.module';
+import { ThemeModule } from './api/theme/theme.module';
+import { UserModule } from './api/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { CategoryModule } from './category/category.module';
 import { configValidationSchema } from './config/config.schema';
-import { HintsModule } from './hints/hints.module';
-import { ThemeModule } from './theme/theme.module';
-import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
