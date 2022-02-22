@@ -6,7 +6,7 @@ import { verify } from 'jsonwebtoken';
 import { tokenSecret } from 'src/config/auth';
 
 import { AuthService } from './auth.service';
-import { AuthenticatedUser } from './dtos/authenticated-user.dto';
+import { UserMap } from './mappers/user.map';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -28,9 +28,9 @@ export class AuthGuard implements CanActivate {
     }
 
     try {
-      request.user = (await this.authService.findOne(
-        <string>verified.sub,
-      )) as any as AuthenticatedUser;
+      request.user = UserMap.toDto(
+        await this.authService.findOne(<string>verified.sub),
+      );
     } catch {
       throw new UnauthorizedException();
     }
