@@ -16,7 +16,12 @@ export class UserRole {
 @Entity()
 export class User extends BaseEntity<User> {
   @IsEnum(UserRole, { always: true })
-  @Column({ type: 'enum', nullable: false })
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+    nullable: false,
+  })
   @Description(User, {
     subject: 'Tipo',
     placeholder: 'tipo',
