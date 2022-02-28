@@ -1,6 +1,4 @@
 import { ForbiddenException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import {
@@ -9,18 +7,18 @@ import {
   tokenExpiresIn,
   refreshTokenExpiresIn,
 } from 'src/config/auth';
-import { Repository } from 'typeorm';
+import { EntityManager } from 'typeorm';
 
 import { User } from '../user/entities/user.entity';
 import { LoginResponse } from './dtos/login-response.dto';
 
-export class AuthService extends TypeOrmCrudService<User> {
-  constructor(@InjectRepository(User) repo: Repository<User>) {
-    super(repo);
-  }
-
-  async login(email: string, password: string): Promise<LoginResponse> {
-    const user = await this.repo.findOne({ email });
+export class AuthService {
+  async login(
+    manager: EntityManager,
+    email: string,
+    password: string,
+  ): Promise<LoginResponse> {
+    const user = await manager.findOne(User, { email });
 
     if (!user) {
       throw new ForbiddenException('Password or email incorrect');
@@ -42,7 +40,7 @@ export class AuthService extends TypeOrmCrudService<User> {
       expiresIn: refreshTokenExpiresIn,
     });
 
-    await this.repo.save({
+    await manager.save(User, {
       ...user,
       refreshToken,
     });

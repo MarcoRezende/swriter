@@ -1,13 +1,13 @@
 {
   "type": "mysql",
-  "host": "swriter_database",
+  "host": "localhost",
   "port": "3306",
-  "username": "",
+  "username": "root",
   "password": "",
   "database": "swriter",
-  "entities": ["dist/**/*.entity.js"],
+  "entities": ["dist/api/**/entities/*.entity.js"],
   "subscribers": ["dist/**/*.subscriber.js"],
-  "migrations": ["dist/src/_migrations/*.js"],
+  "migrations": ["dist/_migrations/*.js"],
   "cli": {
     "migrationsDir": "src/_migrations"
   },

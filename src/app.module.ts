@@ -33,11 +33,11 @@ import { configValidationSchema } from './config/config.schema';
         };
       },
     }),
+    AuthModule,
     HintsModule,
     CategoryModule,
     ThemeModule,
     UserModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

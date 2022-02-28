@@ -1,3 +1,4 @@
+import { Category } from '@api/category/entities/category.entity';
 import {
   IsBoolean,
   IsNotEmpty,
@@ -8,12 +9,11 @@ import {
 } from 'class-validator';
 import { BaseEntity } from 'src/_common/base_entity';
 import { Description } from 'src/_common/decorators/description.decorator';
-import { Category } from 'src/category/entities/category.entity';
 import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
 @Entity()
 export class Hint extends BaseEntity<Hint> {
-  @ManyToMany(type => Category, genre => genre.hint, {
+  @ManyToMany(() => Category, genre => genre.hint, {
     onDelete: 'CASCADE',
     onUpdate: 'NO ACTION',
     nullable: false,
