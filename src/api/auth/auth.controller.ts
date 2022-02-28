@@ -1,4 +1,4 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { getManager } from 'typeorm';
 
 import { AuthService } from './auth.service';
@@ -8,9 +8,9 @@ import { LoginResponse } from './dtos/login-response.dto';
 export class AuthController {
   constructor(private service: AuthService) {}
 
-  @Get('login')
+  @Post('login')
   async login(
-    @Body('payload') { email, password }: { email: string; password: string },
+    @Body() { email, password }: { email: string; password: string },
   ): Promise<LoginResponse> {
     return this.service.login(getManager(), email, password);
   }
