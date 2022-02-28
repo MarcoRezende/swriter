@@ -1,13 +1,13 @@
+import { Hint } from '@api/hints/entities/hint.entity';
+import { Theme } from '@api/theme/entities/theme.entity';
 import { IsString } from 'class-validator';
 import { BaseEntity } from 'src/_common/base_entity';
 import { Description } from 'src/_common/decorators/description.decorator';
-import { Hint } from 'src/hints/entities/hint.entity';
-import { Theme } from 'src/theme/entities/theme.entity';
 import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Category extends BaseEntity<Category> {
-  @ManyToMany(type => Hint, hint => hint.categories, {
+  @ManyToMany(() => Hint, hint => hint.categories, {
     onDelete: 'CASCADE',
     onUpdate: 'NO ACTION',
     nullable: false,
@@ -15,7 +15,7 @@ export class Category extends BaseEntity<Category> {
   })
   hint: Hint;
 
-  @ManyToOne(type => Theme, theme => theme.categories, {
+  @ManyToOne(() => Theme, theme => theme.categories, {
     eager: true,
     onDelete: 'CASCADE',
     onUpdate: 'NO ACTION',
