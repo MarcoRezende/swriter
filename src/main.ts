@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { ErrorInterceptor } from '@interceptors/error.interceptor';
 import { NestFactory } from '@nestjs/core';
 
