@@ -1,4 +1,4 @@
-import { hash } from 'bcrypt';
+import { hashSync } from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { IsEmail, IsEnum, Length } from 'class-validator';
 import { BaseEntity } from 'src/_common/base_entity';
@@ -44,7 +44,6 @@ export class User extends BaseEntity<User> {
   })
   email: string;
 
-  @Exclude()
   @Length(6, 200)
   @Column({ type: 'varchar', length: 200, nullable: false })
   password: string;
@@ -54,7 +53,7 @@ export class User extends BaseEntity<User> {
   refreshToken?: string;
 
   @BeforeInsert()
-  async hashPassword() {
-    this.password = await hash(this.password, 8);
+  hashPassword() {
+    this.password = hashSync(this.password, 8);
   }
 }
