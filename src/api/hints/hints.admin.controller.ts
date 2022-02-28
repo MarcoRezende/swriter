@@ -1,29 +1,22 @@
-import {
-  DescriptionProps,
-  entityDescription,
-} from '@decorators/description.decorator';
+import { AdminController } from '@decorators/admin-controller.decorator';
+import type { DescriptionProps } from '@decorators/description.decorator';
+import { entityDescription } from '@decorators/description.decorator';
 import {
   Delete,
   Get,
   Post,
-  Query,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CrudController } from '@nestjsx/crud';
+import type { CrudController } from '@nestjsx/crud';
 import { diskStorage } from 'multer';
-import { AppController } from 'src/_common/decorators/app-controller.decorator';
-import { DeleteResult, getManager } from 'typeorm';
+import type { DeleteResult } from 'typeorm';
 
-import { AuthGuard } from '../auth/auth.guard';
-import { RoleGuard } from '../auth/role.guard';
-import { UserRole } from '../user/entities/user.entity';
 import { Hint } from './entities/hint.entity';
 import { HintsService } from './hints.service';
 
-@AppController(Hint, 'hint', {
+@AdminController(Hint, 'hint', {
   query: {
     join: {
       categories: { eager: true },
@@ -31,23 +24,12 @@ import { HintsService } from './hints.service';
     },
   },
 })
-export class HintsController implements CrudController<Hint> {
+export class HintsAdminController implements CrudController<Hint> {
   constructor(public service: HintsService) {}
 
   @Get('entityDescription')
   async entityDescription(): Promise<DescriptionProps[]> {
     return entityDescription(Hint);
-  }
-
-  @UseGuards(AuthGuard, new RoleGuard([UserRole.ADMIN]))
-  @Get('random')
-  async getRandomHint(@Query('filter') filters?: string[]): Promise<Hint> {
-    const hint = await this.service.getRandom(getManager(), filters);
-
-    return this.service.repo.save({
-      ...hint,
-      timesDrawn: hint.timesDrawn + 1,
-    });
   }
 
   @Post('importCsv')

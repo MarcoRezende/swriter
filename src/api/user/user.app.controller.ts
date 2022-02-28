@@ -1,5 +1,5 @@
 import { AppController } from '@decorators/app-controller.decorator';
-import { CrudController } from '@nestjsx/crud';
+import type { CrudController } from '@nestjsx/crud';
 
 import { User } from './entities/user.entity';
 import { UsersService } from './user.service';
