@@ -5,12 +5,9 @@ import { BaseEntity } from 'src/_common/base_entity';
 import { Description } from 'src/_common/decorators/description.decorator';
 import { BeforeInsert, Column, Entity } from 'typeorm';
 
-export class UserRole {
-  @Description({}, { subject: 'Usuário' })
-  static readonly USER: 'USER';
-
-  @Description({}, { subject: 'Administrador' })
-  static readonly ADMIN: 'ADMIN';
+export enum UserRole {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }
 
 @Entity()
