@@ -1,11 +1,7 @@
-import { AuthGuard } from '@api/auth/auth.guard';
-import { RoleGuard } from '@api/auth/role.guard';
-import { UserRole } from '@api/user/entities/user.entity';
 import {
   applyDecorators,
   BadRequestException,
   Controller,
-  UseGuards,
 } from '@nestjs/common';
 import type { CrudOptions } from '@nestjsx/crud';
 import { Crud } from '@nestjsx/crud';
@@ -14,8 +10,11 @@ export const AdminController = (
   type: any,
   endpoint: string,
   crudOptions: Partial<CrudOptions> = {},
-) =>
-  applyDecorators(
+) => {
+  const query = crudOptions.query ?? {};
+  delete crudOptions.query;
+
+  return applyDecorators(
     Crud({
       model: {
         type,
@@ -31,6 +30,7 @@ export const AdminController = (
       query: {
         alwaysPaginate: true,
         maxLimit: 50,
+        ...query,
       },
       params: {
         id: {
@@ -44,6 +44,6 @@ export const AdminController = (
         exceptionFactory: errors => new BadRequestException(errors),
       },
     }),
-    UseGuards(AuthGuard, new RoleGuard([UserRole.ADMIN])),
     Controller(`admin/${endpoint}`),
   );
+};
