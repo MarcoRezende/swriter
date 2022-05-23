@@ -1,4 +1,5 @@
-import { Controller, Delete, Get } from '@nestjs/common';
+import { AdminController } from '@decorators/admin-controller.decorator';
+import { Delete, Get } from '@nestjs/common';
 import type { CrudController } from '@nestjsx/crud';
 import type { DescriptionProps } from 'src/_common/decorators/description.decorator';
 import { entityDescription } from 'src/_common/decorators/description.decorator';
@@ -7,7 +8,7 @@ import type { DeleteResult } from 'typeorm';
 import { Theme } from './entities/theme.entity';
 import { ThemeService } from './theme.service';
 
-@Controller('theme')
+@AdminController(Theme, 'theme')
 export class ThemeAdminController implements CrudController<Theme> {
   constructor(public service: ThemeService) {}
 
